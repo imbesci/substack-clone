@@ -1,0 +1,36 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+{% block title %}Substack - Login
+{% endblock title %}
+{% block content %}
+{% include 'snippets/header.html' %}
+
+<h1>Welcome back!</h1>
+<form method="post" action=".">{% csrf_token %}
+    {% for field in form %}
+    <p>
+        {{field.label_tag}}
+        {{field}}
+
+        {% if field.help_text %}
+            <small style="color:white;">{{ field }}</small>
+        {% endif %}
+    </p>
+    {% endfor %}
+
+    {% for error in field.errors %}
+    <small style="color:red;">{{ error }}</small>
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <small style="color:red;">{{ form.non_field_errors }}</small>
+    {% endif %}
+
+    {% if request.GET.auth_failed %}
+    <input type="hidden" name="auth_failed" value="{{ request.GET.auth_failed }}">
+    {% endif %}
+    <input type='submit'></input>
+</form>
+
+{% endblock %}

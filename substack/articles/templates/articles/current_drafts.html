@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+{% block title %}Substack - Your Drafts
+{% endblock title %}
+{% block content %}
+{% include 'snippets/header.html' %}
+
+<div class="page">
+{% for draft in drafts %}
+    <div class="article"> 
+        <a href="{% url 'articles:update' draft.pk %}"><h2>{{draft.title}}</h2></a>
+        <h5> {{draft.author.username}}  &nbsp &nbsp &nbsp {{ draft.MonthDayYear }} </h5>
+        <h6>{{ draft.description }} </h6>
+    </div>
+{% endfor %}
+</div>
+
+
+{% include 'snippets/footer.html' %}
+{% endblock content %}

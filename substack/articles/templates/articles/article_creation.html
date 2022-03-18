@@ -1,0 +1,23 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+{% block title %} Substack - Create
+{% endblock title %}
+{% block content  %}
+{% include 'snippets/header.html' %}
+
+
+
+<h2 style="text-align:center;">Write your article here</h2>
+
+<form id='create-article-form' method='post' action="." enctype="multipart/form-data">{% csrf_token %}
+    {{ articleForm.media }}
+    {{ articleForm }}
+    <button name="submit">Post your new article</button>
+    <button name="saveAsDraft" value="True">Save as draft</button>
+</form>
+
+
+
+{% include 'snippets/footer.html' %}
+{% endblock content %}

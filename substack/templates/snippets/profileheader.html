@@ -1,0 +1,31 @@
+{% load static %}
+<style>
+
+.btn, .btn-sm, .btn-outline-primary:hover {
+    text-color: white !important;
+}
+</style>
+<div class="container-fluid border-bottom">
+    <div class="row d-flex ">
+        <div class="col-4 m-auto"><a href="/"><img src="{% static 'substacklogo.png' %}" alt="substack logo"></a></div>
+        <div class="col-4 m-auto text-center fs-1 lead">{{request.user.username}}'s Newsletter</div>
+        <div class="col-4 m-auto d-inline-flex justify-content-end">
+            <form action="{% url 'accounts:profile' %}" method="get">
+                <button class="btn btn-sm btn-outline-primary me-3 rounded-2 custombuttonbackground">Dashboard</button></form>
+         
+            <div class="btn-group btn-group-justified ">
+                <button type="button" class="btn btn-sm btn-outline-primary me-3 rounded-2 custombuttonbackground dropdown-toggle" id="timezoneDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Profile
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="timezoneDropdown">
+                    <li><form action="{% url 'accounts:info' %}" method='get'><button class="btn dropdown-item custombuttonbackground">Edit profile</button></form></li>
+                    <li><form action="{% url 'accounts:logout' %}" method='get'><button class=" btn dropdown-item border-top custombuttonbackground">Logout</button></form></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

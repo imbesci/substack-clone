@@ -1,0 +1,81 @@
+{% load static %}
+<style type="text/css">
+    #wholenavbar {
+        background-color: rgba(0,0,0,0) !important;
+        z-index: 15;
+    }
+    #searchbar {
+        width: 35vw !important;
+    }
+    #searchbarinput {
+        background-color: rgba(0,0,0,0) !important;
+        text-color: white !important;
+    }
+
+    form-control::placeholder {
+        text-color:white !important;
+    }
+
+    .custombuttonbackground {
+        background-color: rgba(0,0,0,0) !important;
+    }
+
+    .dropdown-menu {
+        min-width: inherit !important;
+    }
+    .noHover{
+        pointer-events: none !important;
+    }
+    
+</style>
+
+<nav id="wholenavbar" class="navbar navbar-expand navbar-light bg-dark">
+<div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'homepage' %}">
+        <img src="{% static 'substacklogo.png' %}" alt="Substack logo image">
+    </a>
+
+    <div class="navbar-nav mb-0 me-5">
+        <a class="nav-link text-white fw-bold">Resources</a>
+        <a class="nav-link text-white fw-bold">Writers</a>
+        <a class="nav-link text-white fw-bold">Readers</a>
+    </div>    
+    <div class="navbar-nav mb-0 me-5"></div>
+    <div class="navbar-nav mb-0 me-5"></div>
+    <div class="navbar-nav mb-0 me-5"></div>
+    <form id="searchbar" class="d-flex m-auto">
+        <input id="searchbarinput" style="color:white !important; background-color: rbga(0,0,0,0) !important; backdrop-filter: blur(20px); !important; border-color:white !important;" class="form-control text-white me-2" type="search" placeholder="Search for writers or publications..." aria-label="search">
+        <button style="color:white !important; background-color: rbga(0,0,0,0) !important; backdrop-filter: blur(20px); !important; border-color:white !important;" class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+    </form>
+
+    <div class="navbar-nav ms-auto mb-2 mb-0 justify-content-between">
+        {% if user.is_authenticated %}
+
+            <form action="{% url 'accounts:profile' %}" method="get">
+                <button style="color:white !important; background-color: rbga(0,0,0,0) !important; backdrop-filter: blur(20px); !important; border-color:white !important;" class="btn btn-lg btn-outline-primary me-3 rounded-2 custombuttonbackground">Dashboard</button></form>
+         
+            <div class="btn-group btn-group-justified ">
+                <button style="color:white !important; background-color: rbga(0,0,0,0) !important; backdrop-filter: blur(20px); !important; border-color:white !important;" type="button" class="btn btn-lg btn-outline-primary me-5 rounded-2 custombuttonbackground dropdown-toggle" id="timezoneDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Profile
+                </button>
+                <ul class="dropdown-menu col-12" aria-labelledby="timezoneDropdown">
+                    <li><form action="{% url 'accounts:info' %}" method='get'><button class="btn dropdown-item ustombuttonbackground">Edit profile</button></form></li>
+                    <li><form action="{% url 'accounts:logout' %}" method='get'><button class="btn dropdown-item border-top custombuttonbackground">Logout</button></form></li>
+                </ul>
+            </div>
+
+
+        {% else %}
+
+            <form action="{% url 'accounts:create' %}" method="get">
+                <button class=" btn btn-sm btn-outline-primary rounded-2 me-3 custombuttonbackground">Start Writing</button></form>
+         
+            <form action="{% url 'accounts:login' %}" method="get"><li>
+                <button class="btn btn-sm btn-outline-primary me-3 rounded-2 custombuttonbackground">Sign in</button></form>
+
+        {% endif %}
+    </div> 
+</div>
+
+</nav>

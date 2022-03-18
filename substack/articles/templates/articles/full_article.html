@@ -1,0 +1,30 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+{% block title %}Substack - {{Article.title}}
+{% endblock title %}
+{% block content %}
+{% include 'snippets/homepageheader.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2 border-end my-5 "></div>
+        <div class="col-1 "></div>
+            <div class="col-6 d-inline-block my-5">
+                <p class="text-center  lead fs-2">{{ article.title }}</p>
+                <p class="fst-italic text-muted text-center" >{{ article.description }}</p>
+                <p> {{ article.body|safe}}</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'homepage' %}"> <img src="{{article.thumbnail.url}}"></a>
+            </div></div>
+        <div class="col-1 "></div>
+        <div class="col-2 border-start my-5">
+            {% if article.author.pk == request.user.pk %}
+                <button>Edit</button>
+                <button class="mx-2">Delete</button>
+            {% endif %}
+        </div>
+</div>
+</div>
+
+{% endblock %}

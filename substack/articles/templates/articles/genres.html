@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+
+{% block title %}Substack - {{genre}} Articles
+{% endblock title %}
+{% block content %}
+{% include 'snippets/header.html' %}
+
+{% for article in genreArticles %}
+    <div>
+        <a href="{% url 'articles:full' slug=article.slug %}"><h2>{{article.title}}</h2></a>
+        <h5> {{article.author.username}}  &nbsp &nbsp &nbsp {{ article.MonthDayYear }} </h5>
+        <h6>{{ article.description }} </h6>
+    </div>
+{% endfor %}
+
+{% include 'snippets/footer.html' %}
+{% endblock %}

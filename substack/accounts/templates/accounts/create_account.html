@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}http://127.0.0.1:5000/
+{% block title %}Substack - Create an account!
+{% endblock title %}
+{% block content %}
+{% include 'snippets/header.html' %}
+
+<form method="post" action="."> {% csrf_token %}
+{% for field in form %}
+    <p>
+        {{field.label_tag}}
+        {{field}}
+
+        {%if field.help_text %}
+            <small style="color:white;">{{field.help_text}}</small>
+        {% endif %}
+
+        {% for error in field.errors %}
+            <p style="color:red;">{{error}}</p>
+        {% endfor %}
+    </p>
+{% endfor %}
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

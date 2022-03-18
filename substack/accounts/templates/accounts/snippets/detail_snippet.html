@@ -1,0 +1,10 @@
+
+
+<div hx-target="this" hx-swap="outerHTML" style="display:block;">
+    <p>First name: {{user.first_name}}</p>
+    <p>Last name:{{user.last_name}}</p>
+    <p>email:{{user.email}}</p>
+    <p>username:{{user.username}}</p>
+    <button hx-get="{% url 'accounts:edit-snippet' %}">Edit account details</button>
+</div>
+

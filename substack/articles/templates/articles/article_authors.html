@@ -1,0 +1,22 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+
+{% block title %}Substack - Articles{% endblock title %}
+
+{% block content %}
+{% include 'snippets/header.html' %}
+
+<div class="page">
+{% for article in articles %}
+    <div class="article"> 
+        <a href="{% url 'articles:full' slug=article.slug %}"><h2>{{article.title}}</h2></a>
+        <h5> {{article.author.username}}  &nbsp &nbsp &nbsp {{ article.MDYdate }} </h5>
+        <h6>{{ article.description }} </h6>
+    </div>
+{% endfor %}
+</div>
+
+
+{% include 'snippets/footer.html' %}
+{% endblock content %}

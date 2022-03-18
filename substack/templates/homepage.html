@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+    {% include 'snippets/headtags.html' %}
+    <title>Substack - start a paid newsletter</title>
+</head>
+<body>
+    <style>
+        .main { 
+            min-height: 100vh;
+            height: 100%;
+        }
+        .btn-primary, .btn-outline-primary:hover, btn-outline-primary:active {
+            color: white !important;
+        }
+        a {
+            text-decoration:none !important;
+        }
+        a:hover {
+            text-decoration:underline !important;
+        }
+        .customheight {
+            height: 98px !important;
+        }
+        #homepagearticlesrow {
+            min-height: 60vh !important;
+        }  
+        .noHover{
+            pointer-events: none !important;
+        }
+        #frontpagebuttons {
+            margin-bottom: 50vh !important;
+        }
+
+    </style>
+{% include 'snippets/homepageheader.html' %}
+<a class="scrollarrow" href="#aftervideo"><img id="arrow" src="{% static 'arrowdown.png' %}" width="40px" height="40px"></a>
+<div class="video-section">
+
+    {% comment %} <h5 class='front-page-big-text'>The home for great <br> readers <em>and</em> writers.</h5> {% endcomment %}
+    <div id="frontpagebuttons" class="d-flex align-items-center m-auto">
+    <div style="z-index: 5 !important;" class="d-inline-block m-auto mt-4 align-items-center">
+        <div class='front-page-big-text m-auto'>The home for great<br>readers <em>and</em> writers.</div>
+        <div class="d-flex justify-content-center align-items-center" >
+        <a href="https://apps.apple.com/us/app/substack-reader/id1581650857"><button class="btn d-flex justify-content-center align-items-center noHover btn-lg btn-primary fw-bold me-3">&nbsp<img class="mb-2" src="{% static 'aaplsvg.svg' %}" alt="apple logo" height="25px" width="25px">&nbsp&nbspGet the app&nbsp</button></a>
+        <a class="pt-1" href="{% url 'articles:authors' %}">
+            <button style="color:white !important; background-color: rbga(0,0,0,0) !important; backdrop-filter: blur(20px); !important; border-color:white !important;" class="btn noHover btn-lg fs-5 btn-outline-primary">Learn more</button></a>
+        </div>
+    </div>
+</div>
+    
+    <div class="video-container">
+        <div class="color-overlay"></div>
+    <video autoplay loop muted>
+        <source src="static/substackvideo.mp4" type="video/mp4">
+    </video>
+    </div>
+</div>
+
+<section id="aftervideo"><div class="container">
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 fw-normal fs-2 text-center">We believe that what you read matters and great writing<br>is valuable. We're building a future where writers can<br>flourish by being paid directly by readers.</div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 m-auto mt-4 text-center">
+            <a href="{% url 'articles:create' %}"><button class="btn btn-lg btn-primary fw-bold me-3">Start Writing</button></a>
+            <a href="{% url 'articles:authors' %}"><button class="btn btn-lg btn-outline-primary fw-bold">Start Reading</button></a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div></section>
+
+<div class="container mt-5"></div>
+
+<div class="container mt-3">
+<div class="row border-bottom border-primary p-3" id="homepagearticlesrow">
+        <div class="col-1"></div>
+
+        <div class="col-1" id="filteredimages">
+            {% for feature in features %}
+            <div class="d-flex justify-content-end">
+                <a class="py-2 my-1" href="{% url 'articles:full' feature.slug %}">
+                    <img src="{{feature.thumbnail.url}}" alt="image" width="75" height="75">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-5 d-inline-block align-content-between" id="homepagearticlesdiv">
+            {% for feature in features %}
+            <div style="height: 100px;" class="border-top rounded-3 m-auto p-3">
+                <div class="lead d-block fs-5 mx-2"><a class="link-dark" href="{% url 'articles:full' feature.slug %}">{{feature.title}}</a></div>
+                <div class="fs-6 fw-light lh-1 mx-2">{{feature.shorten_desc}}</div>
+            <div class="d-flex justify-content-between">
+                <div class="text-muted mx-2">{{feature.author.username}}</div>
+                <div class="text-muted mx-2">{{feature.MDYdate}}</div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-2 d-flex mt-3">
+            <form id="homepagefilters" action="." data-url="{% url 'homepage' %}"> <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                {% csrf_token %}
+
+                <div class="d-block">
+                    <input type="radio" class="btn-check" name="filter" value="Business" id="filterBusiness" autocomplete="off" >
+                    <label class="btn btn-outline-secondary mx-2  rounded-2" for="filterBusiness">Business</label></form>
+                
+                    <input type="radio" class="btn-check" name="filter" value="Culinary" id="filterCulinary" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 my-3 rounded-2" for="filterCulinary">Culinary</label>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="radio" class="btn-check" name="filter" value="Politics" id="filterPolitics" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 rounded-2" for="filterPolitics">Politics</label>
+
+                    <input type="radio" class="btn-check" name="filter" value="Health" id="filterHealth" autocomplete="off" >
+                    <label class="btn btn-outline-secondary mx-2 my-3 rounded-2" for="filterHealth">Health</label>
+                </div>  
+                
+                <div class="d-flex">
+                    <input type="radio" class="btn-check" name="filter" value="Literature" id="filterLiterature" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 rounded-2" for="filterLiterature">Literature</label>
+                    
+                    <input type="radio" class="btn-check" name="filter" value="Culture" id="filterCulture" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 my-3 rounded-2" for="filterCulture">Culture</label>
+                </div>
+
+                <div class="d-block">
+                    <input type="radio" class="btn-check" name="filter" value="Other" id="filterOther" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 rounded-2" for="filterOther">Other</label>
+                    
+                    <input type="radio" class="btn-check" name="filter" value="Sports" id="filterSports" autocomplete="off">
+                    <label class="btn btn-outline-secondary mx-2 my-3 rounded-2" for="filterSports">Sports</label>
+                </div>
+            </form>
+        </div> {% comment "end of form div" %}{% endcomment %}
+    </div>
+    <div class="col-3"></div>
+    </div>
+</div>{% comment "end of row div" %}{% endcomment %}
+</div>{% comment "end of container div" %}{% endcomment %}
+
+<div class="container">
+    <div class="row border-bottom border-primary p-4">
+        <div class="col-2"></div>
+        <div class="col-8 fw-normal fs-2 text-center fw-light mt-4">“There's something wonderful about writing just for readers. Because your people are there, you have to be accountable, but<br>it's a very pure relationship.”<p class="fs-5 mt-4 text-muted">- Andrew Sullivan, &nbsp <a class="text-muted text-decoration-underline" href="https://andrewsullivan.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=cohort_pages&utm_content=home">The Weekly Dish</a></p>
+            <a  href="{% url 'accounts:signup' %}"><button class="btn btn-lg btn-primary fw-bold my-4">Start Writing</button></a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5 my-5 d-inline-flex align-items-center justify-content-center">
+            <img src="{% static 'telescope.png' %}" alt="telescope" width="300" height="300">
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5 my-5 fs-1 d-inline-flex align-items-center justify-content-center">
+           <div class="p-0 ms-2 d-inline-block justify-content-center"> A new model for writing.<p class="fs-5 text-muted fw-light">The subscription model rewards you for doing great work that you believe in. You don't need to play by the rules of social media to succeed.</p></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-4 my-5 fs-1 d-inline-flex align-items-center justify-content-center">
+                <div class="p-0 ms-2 d-inline-block justify-content-center"> Simple but powerful publishing.<div class="fs-5 text-muted fw-light">Spend all your time and energy focused on the work that really matters: the writing itself. Substack takes care of everything else.</div></div>
+             </div>
+            <div class="col-1"></div>
+            <div class="col-4 my-5 d-inline-flex align-items-center justify-content-center">
+                <img src="{% static 'lightbulb.png' %}" alt="lightbulb" width="300" height="300">
+            </div>
+        
+        <div class="row border-bottom border-primary">
+        <div class="col-1"></div>
+        <div class="col-5 my-5 d-inline-flex align-items-center justify-content-center">
+            <img src="{% static 'lockandkey.png' %}" alt="telescope" width="300" height="300">
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5 my-5 fs-1 d-inline-flex align-items-center justify-content-center">
+           <div class="p-0 ms-2 d-inline-block justify-content-center"> Own your work.<p class="fs-5 text-muted fw-light">On Substack, you own your content, your IP, and your mailing list - forever. You can leave and take it all with you at any time.</p></div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="container">
+    <div class="row border-bottom border-primary p-4">
+        <div class="col-2"></div>
+        <div class="col-8 fw-normal fs-2 text-center fw-light mt-4">“In 2020, Substack became the standard of the independent journalism industry. Not to move would be to capitulate to deliberate obsolescence”<p class="fs-5 mt-4 text-muted">- David Warsh, &nbsp <a class="text-muted text-decoration-underline" href="https://davidwarsh.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=cohort_pages&utm_content=home">Economic Principles</a></p>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div style='min-height:10vh !important;' class="row">
+
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='filter']:checked").val();
+            if(radioValue){
+                var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
+                jQuery.post(
+                    $("#homepagefilters").data('url'),
+                     {filter:radioValue, csrfmiddlewaretoken: CSRFtoken },
+                     success = (response) => {
+                         $("#filteredimages").empty();
+                         $("#homepagearticlesdiv").empty();
+                         for (let i = 0; i < response.filtered.length; i++) {
+                            $("#filteredimages").append('<div class="d-flex justify-content-end"><a class="py-2 my-1" href="'+ response.filtered[i].slug +'"><img src="'+ response.filtered[i].thumburl +'" alt="image" width="75" height="75"></a></div>');
+
+                             $("#homepagearticlesdiv").append('<div style="height: 100px;" class="border-top rounded-3 m-auto p-3"><div class="lead d-block fs-5 mx-2"><a class="link-dark" href="'+ response.filtered[i].slug +'">'+ response.filtered[i].title +'</a></div><div class="fs-6 fw-light lh-1 mx-2">'+ response.filtered[i].description +'</div><div class="d-flex justify-content-between"><div class="text-muted mx-2">'+ response.filtered[i].author +'</div><div class="text-muted mx-2">'+response.filtered[i].date+'</div></div></div>');
+                            };
+
+                     });
+            }
+        });
+    });
+
+</script>
+
+{% include 'snippets/footer.html' %}
+</body>
+</html>

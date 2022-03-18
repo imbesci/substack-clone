@@ -1,0 +1,162 @@
+* {
+    font-family: Cahuenga;
+}
+body {
+    margin:0 auto;
+    padding: 0;
+}
+.logo {
+    z-index: 2;
+    position:absolute;
+    top: 2.3rem;
+    left: 2.3rem; 
+}
+
+.left-header-icons {
+    top: 1.7rem;
+    z-index: 1;
+    position:absolute;
+}
+
+.left-header-icons ul{
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    color:white;
+    margin-left: 2.5em;
+}
+.left-header-icons ul li {
+    margin-left: 1.5rem;
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.right-header-icons {
+    top: 1.7rem;
+    z-index: 1;
+    position:absolute;
+    right: 0px;
+}
+.right-header-icons ul{
+    position:relative;
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    right: .75rem;
+    color:white;
+}
+
+.right-header-icons ul li {
+    margin-left: 1.5rem;
+}
+
+.header-bar {
+    width:100%;
+    height: 3.5rem;
+    display:flex;
+    justify-content:space-between;
+    background-color: rgb(255, 255, 255);
+    border-bottom:2px solid rgb(173, 173, 173);
+}
+.header-bar h3 { 
+    position:relative;
+    display: flex;
+    text-align: center;
+    padding: 1rem;
+}
+#header-logo img {
+    display:flex;
+    position: relative; 
+    margin: 1rem;
+}
+
+.header-right-header-icons {
+    z-index: 1;
+    display:flex;
+    position:relative;
+    text-align: center; 
+    right: 0px;
+}
+.header-right-header-icons ul{
+    position:relative;
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    margin-right:1rem;
+    color:white;
+    top:.75rem;
+}
+
+.header-right-header-icons ul li {
+    margin-left: 1.5rem;
+}
+
+hr {
+    margin:0;
+    padding:0;
+    color:white;
+}
+
+.front-page-big-text {
+    font-size: 68px;
+    text-align: center;
+    font-weight: 400;
+    text-align: center;
+    color:white;
+    font-size: 5rem;
+    padding: 15px;
+    line-height: normal;
+    margin-bottom: 20rem;
+    z-index: 1;
+}
+
+.video-section {
+    top:0;
+    left:0;
+    width: 100%;
+    height: 98vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: fill;
+    overflow:hidden;
+}
+
+.color-overlay {
+    position: absolute;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background-color:black;
+    opacity: 55%;
+    
+}
+.video-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+  }
+
+.video-section video {
+  min-width: 100%; 
+  min-height: 100%; 
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
+
+.scrollarrow {
+    position: absolute;
+    z-index: 1;
+    left:48vw;
+    top:90vh;
+}
+
