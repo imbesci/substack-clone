@@ -1,27 +1,39 @@
-{% extends 'default.html' %}
-{% load static %}
-{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}http://127.0.0.1:5000/
-{% block title %}Substack - Create an account!
-{% endblock title %}
-{% block content %}
-{% include 'snippets/header.html' %}
+    {% extends 'default.html' %}
+    {% load static %}
+    {% load widget_tweaks %}
+    {% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}http://127.0.0.1:5000/
+    {% block title %}Substack - Create an account!
+    {% endblock title %}
+    {% block content %}
+    {% include 'snippets/header.html' %}
 
-<form method="post" action="."> {% csrf_token %}
-{% for field in form %}
-    <p>
-        {{field.label_tag}}
-        {{field}}
+    <div class="align-center col-4 offset-4 mt-5 p-5 border border-primary rounded-3 shadow-lg p-3 mb-5 bg-body rounded">
+        <p class="display-5 text-muted text-center fst-italic mb-3 ml-0">Create an account</p>
+        <hr>
+        <form method="POST" autocomplete='off'>
+            {% csrf_token %}
+            
+            <div class="form-group my-3">
+                <div class="d-flex justify-content-around">
+                    {{ form.first_name.errors }}
+                    {% render_field form.first_name class="form-control me-2" placeholder="First name" %}
 
-        {%if field.help_text %}
-            <small style="color:white;">{{field.help_text}}</small>
-        {% endif %}
+                    {{ form.last_name.errors }}
+                    {% render_field form.last_name class="form-control me-2" placeholder="Last name" %}
+                </div> 
+                
+                {% render_field form.email class="form-control my-3" placeholder="Email" %}
+                {{ form.email.errors }}
 
-        {% for error in field.errors %}
-            <p style="color:red;">{{error}}</p>
-        {% endfor %}
-    </p>
-{% endfor %}
-    <button type="submit">Submit</button>
-</form>
+                {{ form.password1.errors }}
+                {% render_field form.password1 class="form-control"  placeholder="Password"%}
 
-{% endblock %}
+
+                {{ form.password2.errors }}
+                {% render_field form.password2 class="form-control"  placeholder="Re-type password"%}
+            </div>
+            
+            <button type="submit" class="btn btn-lg btn-primary text-white mt-2">Create</button>
+        </form>
+    </div>
+    {% endblock %}

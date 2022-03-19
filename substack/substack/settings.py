@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'ckeditor',
     'ckeditor_uploader',
+    'widget_tweaks',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
