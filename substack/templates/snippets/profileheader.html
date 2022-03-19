@@ -19,7 +19,7 @@
                     Profile
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="timezoneDropdown">
-                    <li><form action="{% url 'accounts:info' %}" method='get'><button class="btn dropdown-item custombuttonbackground">Edit profile</button></form></li>
+                    <li><form action="{% url 'accounts:account-home' %}" method='get'><button class="btn dropdown-item custombuttonbackground">Edit profile</button></form></li>
                     <li><form action="{% url 'accounts:logout' %}" method='get'><button class=" btn dropdown-item border-top custombuttonbackground">Logout</button></form></li>
                 </ul>
             </div>
