@@ -4,7 +4,7 @@
 {% block title %}Substack Dashboard-{{account.username}}'s Newsletter{% endblock title %}
 {% block content %}
 
-{% include 'snippets/profileheader.html' %}
+{% include 'snippets/generalheader.html' %}
 
 <style>
 
@@ -24,6 +24,7 @@
         <div class="col-1 border-start"></div>
         <div class="col-5">
             <p class="display-6 fw-lighter">Posts</p>
+            {% if firstArticle %}
             <div class="border rounded-3">
                 <div class="lead fs-3 mx-2"><a class="link-dark " href="{% url 'articles:full' firstArticle.slug %}">{{firstArticle.title}}</a></div>&nbsp&nbsp&nbsp<small class="text-muted text-sm-end d-inline-block">{{firstArticle.MDYdate}}</small>
                 <div class="border-bottom"></div>
@@ -40,6 +41,12 @@
             </div>
             </div>
             {% endfor %}
+
+            {% else %}
+            <div class="border border-primary rounded-3">
+                <div class="lead fs-3 mx-2"><a class="link-dark " href="{% url 'articles:create' %}">Create your first article</a></div>&nbsp&nbsp&nbsp
+            </div>
+            {% endif %}
         </div>
 
     <div class="col-2">

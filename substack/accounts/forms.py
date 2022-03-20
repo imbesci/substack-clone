@@ -12,6 +12,12 @@ class SubstackUserCreation(UserCreationForm):
     class Meta:
         model = SubstackUser
         fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2']
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) < 4:
+            raise forms.ValidationError("This username is too short")
+        return username
         
 
 class SubstackAuthenticationForm(forms.ModelForm):

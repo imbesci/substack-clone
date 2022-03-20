@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user_model
+from httplib2 import Http
 from .models import SubstackUser
 from .forms import SubstackUserCreation, SubstackAuthenticationForm, SubstackUpdateForm, SubstackAccountUpdateFormset, SubstackAccountUpdate
 from django.contrib.auth.decorators import login_required
@@ -61,11 +63,17 @@ def account_profile(request):
     context = {}
     account = request.user #retrieve the user
     context['account'] = account 
+    numArticles = len(list(Article.objects.all().filter(author = account.pk)))
 
-    firstArticle = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[0]
-    remainingArticles = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[1:]
-    context['firstArticle'] = firstArticle
-    context['remainingArticles'] = remainingArticles
+    if numArticles >0:
+        firstArticle = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[0]
+        context['firstArticle'] = firstArticle
+    else:
+        context['firstArticle'] = None
+
+    if numArticles>1:
+        remainingArticles = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[1:]
+        context['remainingArticles'] = remainingArticles
 
     recentDrafts = Article.objects.filter(author = account.pk, is_draft=True).order_by("-date")[0:3]
     context['drafts'] = recentDrafts
@@ -115,3 +123,14 @@ def edit_snippet(request):
         'user' : user
     }
     return render(request, 'accounts/snippets/edit_snippet.html', context)
+
+def verify_email(request):
+        email = request.POST.get('email')
+        if get_user_model().objects.filter(email = email).exists():
+            return HttpResponse(
+                "<div id='emailverification' style='color:red;'>This username is taken!</div>"
+            )
+        else:
+            return HttpResponse(
+                "<div id='emailverification' style='color:green;'>This username is available!</div>"
+            )

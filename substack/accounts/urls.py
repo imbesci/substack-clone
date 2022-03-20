@@ -16,7 +16,8 @@ urlpatterns = [
 htmxpatterns = [
     re_path(r'^details/$', views.show_account, name='account-home'),
     re_path(r'^details/saved/$', views.detail_snippet, name="detail-snippet"),
-    re_path(r'^htmx/edit/$', views.edit_snippet, name='edit-snippet')
+    re_path(r'^details/edit/$', views.edit_snippet, name='edit-snippet'),
+    re_path(r'^signup/verify-email/', views.verify_email, name="verify-email")
 ]
 
 urlpatterns += htmxpatterns
