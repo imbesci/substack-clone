@@ -18,7 +18,7 @@ def full_article(request, slug):
 
 @login_required(redirect_field_name='auth_failed', login_url= 'accounts:login')
 def create_article(request, ):
-    context = {}
+    context = {'isCreate' : True }
     if request.POST:
         form = CreateArticle(request.POST, request.FILES)
         if form.is_valid():

@@ -6,6 +6,7 @@
     {% endblock title %}
     {% block content %}
     {% include 'snippets/generalheader.html' %}
+    {% url 'accounts:verify-email' as verify_email %}
 
     <div class="align-center col-4 offset-4 mt-5 p-5 border border-primary rounded-3 shadow-lg p-3 mb-5 bg-body rounded">
         <p class="display-5 text-muted text-center fst-italic mb-3 ml-0">Create an account</p>
@@ -17,7 +18,7 @@
                 <div class="d-flex justify-content-around">
 
                     {% render_field form.first_name class="form-control me-2" placeholder="First name" %}
-                    {{ form.first_name.errors |striptags}}
+                    {{ form.first_name.errors|striptags}}
     
                     {% render_field form.last_name class="form-control" placeholder="Last name" %}
                     {{ form.last_name.errors|striptags}}
@@ -25,7 +26,7 @@
                 {% render_field form.username class="form-control my-3" placeholder="Create a username"%}
                 {{ form.username.errors|striptags }}
 
-                {% render_field form.email class="form-control mt-3 mb-2" placeholder="Email" hx-post="verify-email/" hx-trigger="keyup[target.value.length > 7] " hx-target="#emailverification" hx-swap="outerHTML" %}
+                {% render_field form.email class="form-control mt-3 mb-2" placeholder="Email" hx-post=verify_email hx-trigger="keyup[target.value.length > 7] " hx-target="#emailverification" hx-swap="outerHTML" %}
                 {{ form.email.errors|striptags }}
 
                 <div id="emailverification"></div>
@@ -37,7 +38,7 @@
                 {% render_field form.password2 class="form-control my-3"  placeholder="Re-type password"%}
                 {{ form.password2.errors|striptags}}
             </div>
-            <button type="submit" class="btn btn-lg btn-primary text-white mt-2 ">Create</button>
+            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-4  offset-5">Create</button>
         </form>
     </div>
 {% endblock %}

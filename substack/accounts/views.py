@@ -77,6 +77,7 @@ def account_profile(request):
 
     recentDrafts = Article.objects.filter(author = account.pk, is_draft=True).order_by("-date")[0:3]
     context['drafts'] = recentDrafts
+    context['isProfile'] = True
 
 
     return render(request, 'accounts/profile.html', context=context)
@@ -124,7 +125,7 @@ def edit_snippet(request):
     }
     return render(request, 'accounts/snippets/edit_snippet.html', context)
 
-def verify_email(request):
+def verify_email(request):  #verify if email is taken per key input
         email = request.POST.get('email')
         if get_user_model().objects.filter(email = email).exists():
             return HttpResponse(

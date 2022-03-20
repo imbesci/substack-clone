@@ -44,6 +44,12 @@
     <div class="navbar-nav mb-0 me-5"></div>
     <div class="navbar-nav mb-0 me-5"></div>
 
+    {% if isProfile %}
+    <div class="display-6 lead ps-5 offset-2">{{request.user.username}}'s Newsletter</div>
+
+    {% elif isCreate %}
+    <div class="display-6 fst-italic lead ps-1 offset-3">Compose</div>
+    {% endif %}
 
     <div class="navbar-nav ms-auto mb-2 mb-0 justify-content-between">
         {% if user.is_authenticated %}
