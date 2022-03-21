@@ -1,36 +1,26 @@
 {% extends 'default.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
 {% block title %}Substack - Login
 {% endblock title %}
 {% block content %}
-{% include 'snippets/header.html' %}
+{% include 'snippets/generalheader.html' %}
 
-<h1>Welcome back!</h1>
-<form method="post" action=".">{% csrf_token %}
-    {% for field in form %}
-    <p>
-        {{field.label_tag}}
-        {{field}}
+<div class="d-block align-center col-4 offset-4 mt-5 border border rounded-3 shadow-lg p-3 mb-2 bg-body rounded">
+    <p class="display-5 text-muted text-center fst-italic mb-3 ml-0">Welcome back!</p>
+    <hr class="bg-dark" style="background-color:gradien">
+    <form class="d-block " method="post" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+        <div class="col-8 m-auto">
+            {% render_field form.email class="form-control my-3" placeholder="Email"%}
+            {{ form.email.errors|striptags }}
 
-        {% if field.help_text %}
-            <small style="color:white;">{{ field }}</small>
-        {% endif %}
-    </p>
-    {% endfor %}
-
-    {% for error in field.errors %}
-    <small style="color:red;">{{ error }}</small>
-    {% endfor %}
-
-    {% if form.non_field_errors %}
-    <small style="color:red;">{{ form.non_field_errors }}</small>
-    {% endif %}
-
-    {% if request.GET.auth_failed %}
-    <input type="hidden" name="auth_failed" value="{{ request.GET.auth_failed }}">
-    {% endif %}
-    <input type='submit'></input>
+            {% render_field form.password class="form-control mt-3 mb-2" placeholder="Password" %}
+            {{ form.non_field_errors|striptags }}
+            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-4  offset-5">Login</button>
+        </div>
+    <p class="text-muted text-center mt-3 p-0 mb-0">If you dont have an account <a class="text-muted" href="{% url 'accounts:create' %}">please click here</a></p>
 </form>
 
 {% endblock %}

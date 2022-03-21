@@ -12,7 +12,7 @@ from articles.views import create_article
 def login_screen(request):
     user = request.user
     if user.is_authenticated:
-        return redirect("articles:create")
+        return redirect("articles:profile")
 
     if request.method == "POST":
         form = SubstackAuthenticationForm(request.POST)
@@ -27,7 +27,7 @@ def login_screen(request):
                 return redirect("homepage")
     else:
         form = SubstackAuthenticationForm()
-    return render(request, 'accounts/login_webpage.html', context = { 'form':form } )
+    return render(request, 'accounts/login_webpage.html', context = { 'form': form } )
 
 def create_account(request):
     if request.method == 'POST':
