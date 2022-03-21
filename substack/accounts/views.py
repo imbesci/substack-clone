@@ -129,9 +129,9 @@ def verify_email(request):  #verify if email is taken per key input
         email = request.POST.get('email')
         if get_user_model().objects.filter(email = email).exists():
             return HttpResponse(
-                "<div id='emailverification' style='color:red;'>This username is taken!</div>"
+                "<div id='emailverification' style='color:red;'>This email is taken!</div>"
             )
         else:
             return HttpResponse(
-                "<div id='emailverification' style='color:green;'>This username is available!</div>"
+                "<div id='emailverification' style='color:green;'>This email is available!</div>"
             )

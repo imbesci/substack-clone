@@ -1,23 +1,47 @@
 {% extends 'default.html' %}
 {% load static %}
-{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
+{% load widget_tweaks %}
+{% block customcss %} 
+<link rel="stylesheet" href="{% static 'styles.css' %}"> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+{% endblock customcss %}
 {% block title %} Substack - Create
 {% endblock title %}
 {% block content  %}
 {% include 'snippets/generalheader.html' %}
 
+<style>
+    #title {
+        font-size: 50px !important;
+        color: rgb(120,120,120)  !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    #title::placeholder { 
+        color: rgb(214,214,214)  !important ;
+        opacity: 1; 
+      }
+</style>
 
-
-<h2 style="text-align:center;">Write your article here</h2>
-
-<form id='create-article-form' method='post' action="." enctype="multipart/form-data">{% csrf_token %}
+<div class="d-flex justify-content-center col-6 offset-3 mt-5 p-5 rounded-3  p-3 mb-5 bg-body rounded">
+<form id='create-article-form' class="" method='post' action="." enctype="multipart/form-data">{% csrf_token %}
     {{ articleForm.media }}
-    {{ articleForm }}
+    {% render_field articleForm.title id="title" class="d-block border border-white p-0 m-auto shadow-none text-center "%}
+    {% render_field articleForm.description %}
+    {% render_field articleForm.body %}
+    {% render_field articleForm.thumbnail %}
+    {% render_field articleForm.topic  %}
+    
+
+
     <button name="submit">Post your new article</button>
     <button name="saveAsDraft" value="True">Save as draft</button>
 </form>
-
-
+</div>
 
 {% include 'snippets/footer.html' %}
+
+<script>
+    autosize($('#title'));
+</script>
 {% endblock content %}
