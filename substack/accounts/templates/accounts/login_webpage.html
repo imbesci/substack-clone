@@ -8,8 +8,8 @@
 {% include 'snippets/generalheader.html' %}
 
 <div class="d-block align-center col-4 offset-4 mt-5 border border rounded-3 shadow-lg p-3 mb-2 bg-body rounded">
-    <p class="display-5 text-muted text-center fst-italic mb-3 ml-0">Welcome back!</p>
-    <hr class="bg-dark" style="background-color:gradien">
+    <p class="display-5 text-muted text-center fst-italic mb-2 ml-0">Welcome back!</p>
+    <hr class="bg-dark">
     <form class="d-block " method="post" action="{% url 'accounts:login' %}">
         {% csrf_token %}
         <div class="col-8 m-auto">
@@ -18,9 +18,9 @@
 
             {% render_field form.password class="form-control mt-3 mb-2" placeholder="Password" %}
             {{ form.non_field_errors|striptags }}
-            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-4  offset-5">Login</button>
+            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-5 offset-4    ">Login</button>
         </div>
-    <p class="text-muted text-center mt-3 p-0 mb-0">If you dont have an account <a class="text-muted" href="{% url 'accounts:create' %}">please click here</a></p>
+    <p class="text-muted text-center mt-3 p-0 mb-0">If you dont have an account, <a class="text-muted" href="{% url 'accounts:create' %}">please click here</a></p>
 </form>
 
 {% endblock %}

@@ -9,8 +9,8 @@
     {% url 'accounts:verify-email' as verify_email %}
 
     <div class="align-center col-4 offset-4 mt-5 p-5 border rounded-3 shadow-lg p-3 mb-5 bg-body rounded">
-        <p class="display-5 text-muted text-center fst-italic mb-3 ml-0">Create an account</p>
-        <hr>
+        <p class="display-5 text-muted text-center fst-italic mb-2 ml-0">Create an account</p>
+        <hr class="bg-dark">
         <form class="d-block" method="post" action="{% url 'accounts:create' %}">
             {% csrf_token %}
             
