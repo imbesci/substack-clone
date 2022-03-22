@@ -11,37 +11,89 @@
 {% include 'snippets/generalheader.html' %}
 
 <style>
-    #title {
+     #title {
         font-size: 50px !important;
         color: rgb(120,120,120)  !important;
         width: 100% !important;
-        height: auto !important;
+        outline: none !important;
+        overflow-y: hidden !important;
+        resize:none;
     }
-    #title::placeholder { 
+
+    #description {
+        font-size: 20px !important;
+        color: rgb(120,120,120)  !important;
+        width: 100% !important;
+        outline: none !important;
+        overflow-y: hidden !important;
+        resize:none;
+
+    }
+
+    #title::placeholder, #description::placeholder { 
         color: rgb(214,214,214)  !important ;
         opacity: 1; 
-      }
+    }
+    #topicspan {
+        background-color: #DDDDDD !important;
+        outline: none;
+    }
 </style>
 
-<div class="d-flex justify-content-center col-6 offset-3 mt-5 p-5 rounded-3  p-3 mb-5 bg-body rounded">
+<div class="d-flex justify-content-center col-5 offset-4  p-5 rounded-3  mb-5 bg-body rounded">
 <form id='create-article-form' class="" method='post' action="." enctype="multipart/form-data">{% csrf_token %}
-    {{ articleForm.media }}
-    {% render_field articleForm.title id="title" class="d-block border border-white p-0 m-auto shadow-none text-center "%}
-    {% render_field articleForm.description %}
-    {% render_field articleForm.body %}
-    {% render_field articleForm.thumbnail %}
-    {% render_field articleForm.topic  %}
-    
+    {% render_field articleForm.media %}
+    {% render_field articleForm.title id="title" class="d-block border border-white lh-sm p-0 m-auto shadow-none text-start "%}
+    {% render_field articleForm.description id="description" class="d-block border border-white lh-sm p-0 m-auto mt-2 shadow-none text-start" %}
+    {% render_field articleForm.body id="body" %}
+
+    {% render_field articleForm.thumbnail hidden="hidden" %} 
+    <button type="button" class="btn btn-secondary " id="custom-button">Upload footer image</button>
+    <span id="imagepath">No file chosen</span>
+
+    <span id="topicspan" class="badge bg-secondary fs-5">Topic
+    {% render_field articleForm.topic class="form-select-lg" %} </span>
+    </div>
 
 
-    <button name="submit">Post your new article</button>
-    <button name="saveAsDraft" value="True">Save as draft</button>
+    <button class="btn btn-lg btn-secondary text-white" name="saveAsDraft" value="True">Draft</button>
+    <button class="btn btn-lg btn-primary text-white" name="submit">Post</button>
 </form>
 </div>
 
 {% include 'snippets/footer.html' %}
 
 <script>
-    autosize($('#title'));
+    $('#title').on('input', function() {
+        $(this)
+          .width (50)
+          .height(50)
+          .width (this.scrollWidth)
+          .height(this.scrollHeight);
+      }); 
+    $('#description').on('input', function() {
+    $(this)
+        .width (50)
+        .height(50)
+        .width (this.scrollWidth)
+        .height(this.scrollHeight);
+    }); 
+
+    const djangoinput = document.getElementById("id_thumbnail");
+    const buttonoverlay = document.getElementById("custom-button");
+    const imagepath = document.getElementById("imagepath");
+
+    buttonoverlay.addEventListener("click", function() {
+        djangoinput.click();
+    });
+
+    djangoinput.addEventListener("change", function() {
+        if (djangoinput.value) {
+            imagepath.innerHTML = djangoinput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        } else {
+            imagepath.innerHTML = "No file chosen";
+        }
+    });
+
 </script>
 {% endblock content %}

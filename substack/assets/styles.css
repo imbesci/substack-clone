@@ -160,3 +160,7 @@ hr {
     top:90vh;
 }
 
+.noHover{
+    pointer-events: none !important;
+}
+
