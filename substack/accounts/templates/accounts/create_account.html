@@ -26,7 +26,7 @@
                 {% render_field form.username class="form-control my-3" placeholder="Create a username"%}
                 {{ form.username.errors|striptags }}
 
-                {% render_field form.email class="form-control mt-3 mb-2" placeholder="Email" hx-post=verify_email hx-trigger="keyup[target.value.length > 7] " hx-target="#emailverification" hx-swap="outerHTML" %}
+                {% render_field form.email class="form-control mt-3 mb-2" placeholder="Email" hx-post=verify_email hx-trigger="keyup[target.value.length > 7]" hx-target="#emailverification" hx-swap="outerHTML" %}
                 {{ form.email.errors|striptags }}
 
                 <div id="emailverification"></div>
