@@ -1,8 +1,15 @@
-{% extends 'htmxtemplate.html' %}
+{% extends 'default.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
 {% block title %}Substack - account management{% endblock title %}
-
 {% block content %}
+{% include 'snippets/generalheader.html' %}
+
+
 
 {% include 'accounts/snippets/detail_snippet.html' %}
 
+
+{% include 'snippets/footer.html' %}
 {% endblock content %}

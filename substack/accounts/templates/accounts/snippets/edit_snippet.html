@@ -1,8 +1,20 @@
-<div hx-target="this" hx-swap="outerHTML">
-<form method="post">
-{% csrf_token %}
-{{form.as_p}}
-<button hx-post="{% url 'accounts:detail-snippet' %}">Submit changes</button>
-<button>Cancel</button>
+{% load widget_tweaks %}
+
+
+<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-3 border shadow-lg rounded-3" hx-target="this" hx-swap="outerHTML" style="display:block;">
+    <div class="text-center " style="width:100%;">
+        <form class="" style="width:70% !important;" method="post">{% csrf_token %}
+
+        <div class="fs-4"><span class="ms-1">{% render_field form.first_name class="form-control" %}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Last name: <span class="ms-1">{% render_field form.last_name class="form-control-sm" %}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Email: <span class="ms-1">{% render_field form.email class="form-control-sm" %}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Username: <span class="ms-1">{% render_field form.username class="form-control" %}</span></div>
+
+    </div>
+    <button hx-post="{% url 'accounts:detail-snippet' %}">Submit changes</button>
+    <button>Cancel</button>
 </form>
 </div>

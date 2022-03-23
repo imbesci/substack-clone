@@ -18,6 +18,12 @@
 
     .custombuttonbackground {
         background-color: rgba(0,0,0,0) !important;
+        border-bottom: 1px solid #FF6919 !important;
+    }
+    .custombuttonbackground:hover,
+    .custombuttonbackground:focus {
+        background-color: #FF7E3C !important;
+        color:white !important;
     }
 
     .dropdown-menu {
@@ -46,21 +52,21 @@
 
     {% if isProfile %}
     <div class="display-6 lead ps-5 offset-2">{{request.user.username}}'s Newsletter</div>
-
     {% elif isCreate %}
     <div class="display-6 fst-italic lead ps-1 offset-3">Compose</div>
+    {%elif isDetail %}
+    <div class="display-6 fst-italic lead ps-5 offset-2">Edit your profile</div>
     {% endif %}
 
     <div class="navbar-nav ms-auto mb-2 mb-0 justify-content-between">
         {% if user.is_authenticated %}
 
             <form action="{% url 'accounts:dashboard' %}" method="get">
-                <button class="btn btn-lg btn-outline-primary rounded-2 me-3">Dashboard</button></form>
+                <button class="btn btn-lg btn-outline-primary custombuttonbackground rounded-2 me-3">Dashboard</button></form>
          
             <div class="btn-group btn-group-justified ">
                 <button type="button" class="btn btn-lg btn-outline-primary me-5 rounded-2 custombuttonbackground dropdown-toggle" id="timezoneDropdown" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Profile
+                    aria-expanded="false">Profile
                 </button>
                 <ul class="dropdown-menu col-12" aria-labelledby="timezoneDropdown">
                     <li><form action="{% url 'accounts:account-home' %}" method='get'><button class="btn rounded-2 me-3 ">Edit profile</button></form></li>
@@ -72,10 +78,10 @@
         {% else %}
 
             <form action="{% url 'accounts:create' %}" method="get">
-                <button class=" btn btn-lg btn-outline-primary rounded-2 me-3 ">Start Writing</button></form>
+                <button class=" btn btn-lg btn-outline-primary custombuttonbackground rounded-2 me-3 ">Start Writing</button></form>
          
             <form action="{% url 'accounts:login' %}" method="get"><li>
-                <button class="btn btn-lg btn-outline-primary me-3 rounded-2 ">Sign in</button></form>
+                <button class="btn btn-lg btn-outline-primary custombuttonbackground me-3 rounded-2 ">Sign in</button></form>
 
         {% endif %}
     </div> 

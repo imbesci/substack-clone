@@ -1,10 +1,20 @@
 
+<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-3 border shadow-lg rounded-3 " hx-target="this" hx-swap="outerHTML" style="display:block;">
 
-<div hx-target="this" hx-swap="outerHTML" style="display:block;">
-    <p>First name: {{user.first_name}}</p>
-    <p>Last name:{{user.last_name}}</p>
-    <p>email:{{user.email}}</p>
-    <p>username:{{user.username}}</p>
-    <button hx-get="{% url 'accounts:edit-snippet' %}">Edit account details</button>
+    <div class="text-center " style="width:100%;">
+
+        <div class="fs-4">First name: <span class="ms-1">{{user.first_name}}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Last name: <span class="ms-1">{{user.last_name}}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Email: <span class="ms-1">{{user.email}}</span></div>
+        <hr class="bg-dark">
+        <div class="fs-4 ">Username: <span class="ms-1">{{user.username}}</span></div>
+    
+    </div>
+
+    <div class="d-flex justify-content-end">
+    <button class="btn btn-sm btn-secondary me-3" hx-get="{% url 'accounts:edit-snippet' %}">Edit details</button>
+    </div>
 </div>
 

@@ -88,7 +88,8 @@ def show_account(request):
     pk = request.user.pk
     user = SubstackUser.objects.get(pk=pk)
     context = {
-        'user' : user
+        'user' : user,
+        'isDetail': True
     }
     return render(request, 'accounts/account_details.html', context)
 

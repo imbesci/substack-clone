@@ -8,7 +8,7 @@
     {% include 'snippets/generalheader.html' %}
     {% url 'accounts:verify-email' as verify_email %}
 
-    <div class="align-center col-4 offset-4 mt-5 p-5 border rounded-3 shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="align-center col-4 offset-4 mt-5 p-5 pb-2 border rounded-3 shadow-lg">
         <p class="display-5 text-muted text-center fst-italic mb-2 ml-0">Create an account</p>
         <hr class="bg-dark">
         <form class="d-block" method="post" action="{% url 'accounts:create' %}">
@@ -31,14 +31,15 @@
 
                 <div id="emailverification"></div>
 
-                {% render_field form.password1 class="form-control my-3"  placeholder="Password"%}
+                {% render_field form.password1 class="form-control my-3" placeholder="Password"%}
                 {{ form.password1.errors|striptags }}
 
 
-                {% render_field form.password2 class="form-control my-3"  placeholder="Re-type password"%}
+                {% render_field form.password2 class="form-control my-3" placeholder="Re-type password"%}
                 {{ form.password2.errors|striptags}}
             </div>
-            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-4  offset-5">Create</button>
+            <button type="submit" class="btn btn-lg btn-primary text-white text-center mt-2 px-4 offset-5">Create</button>
         </form>
+        <p class="text-muted text-center mt-3">If you already have an account, <a class="text-muted" href="{% url 'accounts:login' %}">please click here</a></p>
     </div>
 {% endblock %}
