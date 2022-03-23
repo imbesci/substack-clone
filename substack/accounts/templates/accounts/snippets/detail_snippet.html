@@ -1,20 +1,21 @@
 
-<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-3 border shadow-lg rounded-3 " hx-target="this" hx-swap="outerHTML" style="display:block;">
+<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-4 border shadow-lg rounded-3 " hx-target="this" hx-swap="outerHTML" style="display:block;">
+    <div class="continer-fluid d-flex justify-content-center">
+        <div class="col-8">
+            <div class="" style="width:100%;">
+                <div class="fs-4 text-muted">First name: <span class="ms-1 text-black">{{user.first_name}}</span></div>
+                <hr class="bg-dark">
+                <div class="fs-4 text-muted">Last name: <span class="ms-1 text-black">{{user.last_name}}</span></div>
+                <hr class="bg-dark">
+                <div class="fs-4 text-muted">Email: <span class="ms-1 text-black">{{user.email}}</span></div>
+                <hr class="bg-dark">
+                <div class="fs-4 text-muted">Username: <span class="ms-1 text-black">{{user.username}}</span></div>
+            </div>
 
-    <div class="text-center " style="width:100%;">
-
-        <div class="fs-4">First name: <span class="ms-1">{{user.first_name}}</span></div>
-        <hr class="bg-dark">
-        <div class="fs-4 ">Last name: <span class="ms-1">{{user.last_name}}</span></div>
-        <hr class="bg-dark">
-        <div class="fs-4 ">Email: <span class="ms-1">{{user.email}}</span></div>
-        <hr class="bg-dark">
-        <div class="fs-4 ">Username: <span class="ms-1">{{user.username}}</span></div>
-    
-    </div>
-
-    <div class="d-flex justify-content-end">
-    <button class="btn btn-sm btn-secondary me-3" hx-get="{% url 'accounts:edit-snippet' %}">Edit details</button>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-lg btn-secondary " hx-get="{% url 'accounts:edit-snippet' %}">Edit details</button>
+            </div>
+        </div>
     </div>
 </div>
 
