@@ -87,6 +87,7 @@ def account_dashboard(request):
 def show_account(request):
     pk = request.user.pk
     user = SubstackUser.objects.get(pk=pk)
+
     context = {
         'user' : user,
         'isDetail': True
@@ -97,21 +98,22 @@ def show_account(request):
 def detail_snippet(request):
     pk = request.user.pk
     user = SubstackUser.objects.get(pk=pk)
-    form = SubstackAccountUpdate(instance=user)
 
     if request.method == "POST":
         form = SubstackAccountUpdate(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            redirect('accounts:detail-snippet')
+            print('form saved')
+            return redirect('accounts:detail-snippet')
         else:
-            redirect('accounts:edit-snippet', user)
+            return redirect('accounts:edit-snippet', user)
 
+    form = SubstackAccountUpdate(instance=user)
     context= {
         'form' : form,
         'user' : user
     } 
-    return render(request, 'accounts/account_details.html', context)
+    return render(request, 'accounts/snippets/detail_snippet.html', context)
 
 @login_required(login_url='accounts:login', redirect_field_name='auth_failed')
 def edit_snippet(request): 

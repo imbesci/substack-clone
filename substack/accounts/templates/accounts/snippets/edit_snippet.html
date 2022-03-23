@@ -1,24 +1,26 @@
 {% load widget_tweaks %}
 {% load static %}
 
-<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-4 border shadow-lg rounded-3 " hx-target="this" hx-swap="outerHTML" style="display:block;">
-    <div class="continer-fluid d-flex justify-content-center">
-        <form class="" style="width:70% !important;" method="post">{% csrf_token %}
 
-            <div class="" style="width:100%;">
-                <div class="fs-4 text-muted">First name: <span class="ms-1 ">{% render_field form.first_name class="form-control-sm" %}</span></div>
+<div class="position-relative start-50 translate-middle-x col-4 mt-5 py-4 border shadow-lg rounded-3" style="display:block;">
+    <div class="continer-fluid d-flex justify-content-center">
+
+        <form class="" style="width:70% !important;" method="post"> {% csrf_token %}
+            <div style="width:100%;">
+                <div class="fs-4 text-muted">First name: <span class="ms-1">{% render_field form.first_name class="form-control-sm" %}</span></div>
                 <hr class="bg-dark mt-1">
-                <div class="fs-4 text-muted">Last name: <span class="ms-1 ">{% render_field form.last_name class="form-control-sm" %}</span></div>
+                <div class="fs-4 text-muted">Last name: <span class="ms-1">{% render_field form.last_name class="form-control-sm" %}</span></div>
                 <hr class="bg-dark mt-1">
-                <div class="fs-4 text-muted">Email: <span class="ms-1" >{% render_field form.email class="form-control-sm" %}</span></div>
+                <div class="fs-4 text-muted">Email: <span class="ms-1">{% render_field form.email class="form-control-sm" %}</span></div>
                 <hr class="bg-dark mt-1">
                 <div class="fs-4 text-muted">Username: <span class="ms-1">{% render_field form.username class="form-control-sm" %}</span></div>
             </div>
-
             <div class="d-flex justify-content-end">
-                <button id="test" class="btn biggerbutton btn-secondary btn-sm me-2">Cancel</button>
-                <button class="btn biggerbutton btn-primary text-white btn-sm"  hx-post="{% url 'accounts:detail-snippet'%}">Confirm</button>
+                <button class="btn biggerbutton btn-secondary btn-sm me-2" hx-swap="#replacement" hx-target="innerHTML">Cancel</button>
+                <button class="btn biggerbutton btn-primary text-white btn-sm" hx-post="{% url 'accounts:detail-snippet' %}" hx-target="#replacement" hx-swap="innerHTML">
+                    Confirm</button>
             </div>
         </form>
+
     </div>
 </div>
