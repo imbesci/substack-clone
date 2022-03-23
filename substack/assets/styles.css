@@ -12,84 +12,6 @@ body {
     left: 2.3rem; 
 }
 
-.left-header-icons {
-    top: 1.7rem;
-    z-index: 1;
-    position:absolute;
-}
-
-.left-header-icons ul{
-    list-style-type: none;
-    display:flex;
-    align-items: center;
-    color:white;
-    margin-left: 2.5em;
-}
-.left-header-icons ul li {
-    margin-left: 1.5rem;
-    font-size: 16px;
-    font-weight: 550;
-}
-
-.right-header-icons {
-    top: 1.7rem;
-    z-index: 1;
-    position:absolute;
-    right: 0px;
-}
-.right-header-icons ul{
-    position:relative;
-    list-style-type: none;
-    display:flex;
-    align-items: center;
-    right: .75rem;
-    color:white;
-}
-
-.right-header-icons ul li {
-    margin-left: 1.5rem;
-}
-
-.header-bar {
-    width:100%;
-    height: 3.5rem;
-    display:flex;
-    justify-content:space-between;
-    background-color: rgb(255, 255, 255);
-    border-bottom:2px solid rgb(173, 173, 173);
-}
-.header-bar h3 { 
-    position:relative;
-    display: flex;
-    text-align: center;
-    padding: 1rem;
-}
-#header-logo img {
-    display:flex;
-    position: relative; 
-    margin: 1rem;
-}
-
-.header-right-header-icons {
-    z-index: 1;
-    display:flex;
-    position:relative;
-    text-align: center; 
-    right: 0px;
-}
-.header-right-header-icons ul{
-    position:relative;
-    list-style-type: none;
-    display:flex;
-    align-items: center;
-    margin-right:1rem;
-    color:white;
-    top:.75rem;
-}
-
-.header-right-header-icons ul li {
-    margin-left: 1.5rem;
-}
 
 hr {
     margin:0;
@@ -163,4 +85,6 @@ hr {
 .noHover{
     pointer-events: none !important;
 }
+
+
 

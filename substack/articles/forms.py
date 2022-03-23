@@ -9,7 +9,7 @@ class CreateArticle(forms.ModelForm):
 
     class Meta:
         model = models.Article
-        fields = ['title', 'description', 'body', 'thumbnail', 'topic' ]
+        fields = ['title', 'description', 'body', 'thumbnail', "topic" ]
         help_texts = {
                     'title': 'Please choose a unique title.',
                     }

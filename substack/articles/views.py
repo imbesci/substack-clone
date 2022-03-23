@@ -3,7 +3,7 @@ from .models import Article
 from .forms import CreateArticle
 from django.http import HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+
 
 def articles_authors(request):
     articles = Article.objects.all().filter(is_draft=False).order_by("-date")
@@ -27,7 +27,7 @@ def create_article(request):
             if request.POST.get('saveAsDraft'):
                 form.is_draft = True
                 form.save()
-                return redirect('articles:authors')
+                return redirect('accounts:dashboard')
             elif form.generate_slug():
                 form.slug = form.generate_slug()
                 form.save()

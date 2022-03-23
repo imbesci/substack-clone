@@ -10,7 +10,7 @@ urlpatterns = [
     re_path(r'^signup/$', views.create_account, name='create'),
     re_path(r'^create/$', views.create_account, name='signup'),
     re_path(r'^logout/$', views.logout_view, name='logout'),
-    re_path(r'^profile/$', views.account_profile, name='profile')
+    re_path(r'^profile/$', views.account_dashboard, name='dashboard')
 ]
 
 htmxpatterns = [

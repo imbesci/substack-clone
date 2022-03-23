@@ -54,7 +54,7 @@
     <div class="navbar-nav ms-auto mb-2 mb-0 justify-content-between">
         {% if user.is_authenticated %}
 
-            <form action="{% url 'accounts:profile' %}" method="get">
+            <form action="{% url 'accounts:dashboard' %}" method="get">
                 <button class="btn btn-lg btn-outline-primary rounded-2 me-3">Dashboard</button></form>
          
             <div class="btn-group btn-group-justified ">

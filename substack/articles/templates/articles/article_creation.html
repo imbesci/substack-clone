@@ -4,8 +4,6 @@
 {% block customcss %} 
 <link rel="stylesheet" href="{% static 'styles.css' %}"> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 {% endblock customcss %}
 {% block title %} Substack - Create
 {% endblock title %}
@@ -13,7 +11,7 @@
 {% include 'snippets/generalheader.html' %}
 
 <style>
-     #title {
+    #title {
         font-size: 50px !important;
         color: rgb(120,120,120)  !important;
         width: 100% !important;
@@ -21,7 +19,7 @@
         overflow-y: hidden !important;
         resize:none;
     }
-
+    
     #description {
         font-size: 20px !important;
         color: rgb(120,120,120)  !important;
@@ -29,24 +27,45 @@
         outline: none !important;
         overflow-y: hidden !important;
         resize:none;
-
+    
     }
-
+    
     #title::placeholder, #description::placeholder { 
         color: rgb(214,214,214)  !important ;
         opacity: 1; 
     }
-    #topicspan {
-        background-color: #DDDDDD !important;
-        outline: none;
-    }
-
+    
     .lightbtncolor {
         background-color: #bdc2c7 !important;
-        border:none !important;
+        border:1px solid white !important;
     }
-
-
+    
+    .lightbtncolor:hover {
+        background-color: #bdc2c7 !important;
+        border: 1px solid #8f9294 !important;
+        cursor:default !important;
+    }
+    
+    #id_topic {
+        padding: 8px 15px;
+        background-color: white;
+        color: #6C757D;
+        border: 1px solid #bdc2c7;
+        border-radius: 4px;
+    
+    
+    }
+    #id_topic:focus, 
+    #id_topic:hover {
+        outline:none;
+        border: 1px solid #8f9294;
+    }
+    #id_topic option {
+        background-color: white;
+    }
+    #id_topic option:hover, #id_topic option:focus {
+        background-color:#bdc2c7;
+    }
 </style>
 
 <div class="d-flex justify-content-center col-5 offset-4  p-5 rounded-3  mb-5 bg-body rounded">
@@ -59,17 +78,21 @@
         <div class="d-flex justify-content-between mt-3">
             <div>
             {% render_field articleForm.thumbnail hidden="hidden" %} 
-            <button type="button" class="btn btn-secondary lightbtncolor " id="custom-button">Upload footer image</button>
+            <button type="button" class="btn btn-secondary lightbtncolor" id="custom-button">Upload footer image</button>
             <span id="imagepath" class="fs-6 lead text-muted ps-2">No file chosen</span>
             </div>
             
-            {% render_field articleForm.topic class="form-select-lg" %} 
+            <div class="d-block">
+            <span class="fs-6 lead text-muted me-2 ps-2">Topic</span>{% render_field articleForm.topic %}
+            </div>
             
         </div>
-
-
-        <button class="btn btn-lg btn-secondary text-white" name="saveAsDraft" value="True">Draft</button>
-        <button class="btn btn-lg btn-primary text-white" name="submit">Post</button>
+        <div class="d-flex justify-content-end">
+            <div class="mt-5 pt-3">
+            <button class="btn btn-lg btn-secondary lightbtncolor me-2 text-white" name="saveAsDraft" value="True">Draft</button>
+            <button class="btn btn-lg btn-primary text-white" name="submit">Post</button>
+            </div>
+        </div>
     </form>
 </div>
 
@@ -77,8 +100,6 @@
 
 <script>
 $(document).ready(function() {
-
-
     $('#title').on('input', function() {
         $(this)
           .width (50)
@@ -93,31 +114,19 @@ $(document).ready(function() {
         .width (this.scrollWidth)
         .height(this.scrollHeight);
     }); 
-
-    const djangoinput = document.getElementById("id_thumbnail");
-    const buttonoverlay = document.getElementById("custom-button");
-    const imagepath = document.getElementById("imagepath");
-
-    buttonoverlay.addEventListener("click", function() {
-        djangoinput.click();
+    const djangoInput = document.getElementById("id_thumbnail");
+    const buttonOverlay = document.getElementById("custom-button");
+    const imagePath = document.getElementById("imagepath");
+    buttonOverlay.addEventListener("click", function() {
+        djangoInput.click();
     });
-
-    djangoinput.addEventListener("change", function() {
-        if (djangoinput.value) {
-            imagepath.innerHTML = djangoinput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+    djangoInput.addEventListener("change", function() {
+        if (djangoInput.value) {
+            imagePath.innerHTML = djangoInput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
         } else {
-            imagepath.innerHTML = "No file chosen";
+            imagePath.innerHTML = "No file chosen";
         }
     });
-
-    $('#id_topic').select2(
-        {
-        minimumResultsForSearch: Infinity,
-        width: '20%',
-        placeholder:'Select a topic',
-         
-    }
-    );
 });
 </script>
 {% endblock content %}

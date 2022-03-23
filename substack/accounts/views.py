@@ -12,7 +12,7 @@ from articles.views import create_article
 def login_screen(request):
     user = request.user
     if user.is_authenticated:
-        return redirect("articles:profile")
+        return redirect("accounts:dashboard")
 
     if request.method == "POST":
         form = SubstackAuthenticationForm(request.POST)
@@ -24,7 +24,7 @@ def login_screen(request):
                 login(request, user)
                 if request.POST.get('auth_failed'):
                     return redirect(request.POST.get('auth_failed'))
-                return redirect("homepage")
+                return redirect("accounts:dashboard")
     else:
         form = SubstackAuthenticationForm()
     return render(request, 'accounts/login_webpage.html', context = { 'form': form } )
@@ -53,11 +53,10 @@ def send_to_login(request):
     return redirect('accounts:login')
 
 @login_required(login_url='accounts:login', redirect_field_name='auth_failed')
-def account_profile(request):
+def account_dashboard(request):
     if request.method == "POST":
         draftKey = request.POST.get('draftRedirect')
         draftData = Article.objects.get(pk=draftKey)
-        print(draftKey)
         return render(request, 'articles/article_creation.html', context = {'draftData' : draftData } )
 
     context = {}
@@ -80,7 +79,7 @@ def account_profile(request):
     context['isProfile'] = True
 
 
-    return render(request, 'accounts/profile.html', context=context)
+    return render(request, 'accounts/dashboard.html', context=context)
 
 
 ##Code below uses HTMX snippets         Account Updating ##
