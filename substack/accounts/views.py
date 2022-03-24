@@ -60,7 +60,7 @@ def account_dashboard(request):
     context = {}
     account = request.user #retrieve the user
     context['account'] = account 
-    numArticles = len(list(Article.objects.all().filter(author = account.pk)))
+    numArticles = len(list(Article.objects.all().filter(author = account.pk, is_draft = False)))
 
     if numArticles >0:
         firstArticle = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[0]
@@ -75,7 +75,6 @@ def account_dashboard(request):
     recentDrafts = Article.objects.filter(author = account.pk, is_draft=True).order_by("-date")
     context['drafts'] = recentDrafts
     context['isProfile'] = True
-
 
     return render(request, 'accounts/dashboard.html', context=context)
 

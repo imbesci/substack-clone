@@ -16,16 +16,17 @@
                 <p class="fst-italic text-muted text-center" >{{ article.description }}</p>
                 <p> {{ article.body|safe}}</p>
                 <div class="d-flex justify-content-center">
-                    <a href="{% url 'homepage' %}"> <img src="{{article.thumbnail.url}}"></a>
+                    <a href="{% url 'homepage' %}"> <img class="rounded img-fluid" src="{{article.thumbnail.url}}"></a>
             </div></div>
         <div class="col-1 "></div>
         <div class="col-2 border-start my-5">
             {% if article.author.pk == request.user.pk %}
                 <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-sm btn-outline-secondary me-2">Edit</button></a>
-                <a href="{% url 'articles:delete' article.pk %}"><button class="btn btn-sm btn-outline-danger ">Delete</button><a>
+                <a href="{% url 'articles:delete' article.pk %}"><button class="btn btn-sm btn-outline-danger">Delete</button><a>
             {% endif %}
         </div>
 </div>
 </div>
 
+{% include 'snippets/footer.html' %}
 {% endblock %}
