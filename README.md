@@ -14,4 +14,4 @@ Django backend, front end is purely HTML, CSS/Bootstrap, and HTMX with a touch o
 
 Areas to improve for future projects:
 1) The CSS is messy. I mix bootstrap, with a styles.css sheet, as well as in-html styling. This is an unacceptable practice in the real world as it is not structured in a logical manner if anyone else needed to go back and review/work on it
-2) Lack of unittesting. In future projects, my plan is to follow TDD-structured development style as it is practical and will protect about bugs as the codebase develops.
+2) Lack of unittesting. In future projects, my plan is to follow TDD-structured development style as it is practical and will help protect against bugs as the codebase develops.
