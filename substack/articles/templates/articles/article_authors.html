@@ -1,20 +1,23 @@
 {% extends 'default.html' %}
 {% load static %}
 {% block customcss %} <link rel="stylesheet" href="{% static 'styles.css' %}"> {% endblock customcss %}
-
 {% block title %}Substack - Articles{% endblock title %}
-
 {% block content %}
 {% include 'snippets/generalheader.html' %}
 
-<div class="page">
-{% for article in articles %}
-    <div class="article"> 
-        <a href="{% url 'articles:full' slug=article.slug %}"><h2>{{article.title}}</h2></a>
-        <h5> {{article.author.username}}  &nbsp &nbsp &nbsp {{ article.MDYdate }} </h5>
-        <h6>{{ article.description }} </h6>
+<div class="container-fluid d-flex justify-content-center">
+<div class="col-4">
+    {% for article in articles %}
+    <div class="border-bottom rounded-3 my-3">
+        <div class="lead fs-5 mb-2 mx-2"><a class="link-dark" href="{% url 'articles:full' article.slug %}">{{article.title}}</a></div>
+        <div class="fs-6 fw-light lh-1 mx-2 mb-2">{{article.shorten_desc}}</div>
+    <div class="d-flex justify-content-between">
+        <div class="text-muted mx-2">{{article.MDYdate}}</div>
+        <div class="text-muted mx-2">{{article.views}} views</div>
     </div>
-{% endfor %}
+    </div>
+    {% endfor %}
+</div>
 </div>
 
 

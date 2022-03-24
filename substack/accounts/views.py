@@ -40,14 +40,12 @@ def create_account(request):
         form = SubstackUserCreation()
     return render(request, 'accounts/create_account.html', context = { 'form': form } )
 
-
 def logout_view(request):
     if request.user:
         logout(request)
         return redirect('homepage')
     else:
-        return redirect('homepage')
-        
+        return redirect('homepage')       
 
 def send_to_login(request):
     return redirect('accounts:login')
@@ -74,13 +72,12 @@ def account_dashboard(request):
         remainingArticles = Article.objects.filter(author = account.pk, is_draft=False).order_by("-date")[1:]
         context['remainingArticles'] = remainingArticles
 
-    recentDrafts = Article.objects.filter(author = account.pk, is_draft=True).order_by("-date")[0:3]
+    recentDrafts = Article.objects.filter(author = account.pk, is_draft=True).order_by("-date")
     context['drafts'] = recentDrafts
     context['isProfile'] = True
 
 
     return render(request, 'accounts/dashboard.html', context=context)
-
 
 ##Code below uses HTMX snippets         Account Updating ##
 @login_required(login_url='accounts:login', redirect_field_name='auth_failed')
@@ -126,8 +123,9 @@ def edit_snippet(request):
         'user' : user
     }
     return render(request, 'accounts/snippets/edit_snippet.html', context)
-
-def verify_email(request):  #verify if email is taken per key input
+    
+#verify if email is taken per key input
+def verify_email(request): 
         email = request.POST.get('email')
         if get_user_model().objects.filter(email = email).exists():
             return HttpResponse(
@@ -137,3 +135,4 @@ def verify_email(request):  #verify if email is taken per key input
             return HttpResponse(
                 "<div id='emailverification' style='color:green;'>This email is available!</div>"
             )
+

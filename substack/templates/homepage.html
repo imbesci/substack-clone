@@ -96,7 +96,7 @@
                 <div class="lead d-block fs-5 mx-2"><a class="link-dark" href="{% url 'articles:full' feature.slug %}">{{feature.title}}</a></div>
                 <div class="fs-6 fw-light lh-1 mx-2">{{feature.shorten_desc}}</div>
             <div class="d-flex justify-content-between">
-                <div class="text-muted mx-2">{{feature.author.username}}</div>
+                <a href="{% url 'articles:authors-view' feature.author.pk %}"><div class="text-muted mx-2">{{feature.author.username}}</div></a>
                 <div class="text-muted mx-2">{{feature.MDYdate}}</div>
             </div>
             </div>

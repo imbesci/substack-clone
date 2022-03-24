@@ -1,3 +1,4 @@
+from fcntl import F_SEAL_SEAL
 from django.db import models
 import datetime
 from django.forms import ValidationError
@@ -77,10 +78,11 @@ class Article(models.Model):
         stripped = self.title.strip()
         cleanedTitle = re.sub(r"[^a-zA-Z0-9 :]+",'', stripped).split(' ')[0:7]
         cleanedSlug =  '-'.join(cleanedTitle).lower()
-        if Article.objects.all().filter(author_id=self.author.pk).filter(slug=cleanedSlug):
-            return False
-        else:
-            return cleanedSlug
+        number = 1
+        while Article.objects.all().filter(author_id=self.author.pk).filter(slug=cleanedSlug):
+                cleanedSlug += str(number)
+                number +=1
+        return cleanedSlug
 
     def create_slug_url(self):
         return f"/articles/{self.slug}/"

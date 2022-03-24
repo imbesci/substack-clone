@@ -3,6 +3,7 @@ from .models import Article
 from .forms import CreateArticle
 from django.http import HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
+from accounts.models import SubstackUser
 
 
 def articles_authors(request):
@@ -64,10 +65,11 @@ def update_article(request, key):
             form = form.save(commit=False)
             form.author = request.user
             form.save()
+            print(form.generate_slug())
             if request.POST.get('saveAsDraft'):
                 form.is_draft = True
                 form.save()
-                return redirect('accounts:profile')
+                return redirect('accounts:dashboard')
             elif form.generate_slug():
                 form.slug = form.generate_slug()
                 form.is_draft = False
@@ -89,3 +91,25 @@ def view_drafts(request):
         'drafts': drafts
     }
     return render(request, 'articles/current_drafts.html', context = context)
+
+
+def delete_article(request, pk):
+    article = Article.objects.get(pk=pk)
+    article.delete()
+    return redirect('accounts:dashboard')
+
+
+def authors_view(request, pk):
+    author = SubstackUser.objects.get(pk=pk)
+    authorArticles = Article.objects.all().filter(author = author, is_draft = False)
+    context = {
+        'author' : author,
+        'articles' : authorArticles,
+        'isAuthorArticles' : True
+    }
+
+    return render(request, 'articles/article_authors.html', context)
+
+
+def author_profile(request):
+    pass
