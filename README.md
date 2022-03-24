@@ -3,11 +3,11 @@ This is my attempt at a substack basic clone.
 Django backend, front end is purely HTML, CSS/Bootstrap, and HTMX with a touch of jQuery.
 
 
-https://i.imgur.com/TKBCAEz.gif
+![Homepage view](https://i.imgur.com/TKBCAEz.gif)
 
-https://i.imgur.com/YSfWliw.gif
+![Create account screen](https://i.imgur.com/YSfWliw.gif)
 
-https://i.imgur.com/bBQXn2j.png
+![Compose an article view](https://i.imgur.com/bBQXn2j.png)
 
 
 Areas to improve for future projects:
